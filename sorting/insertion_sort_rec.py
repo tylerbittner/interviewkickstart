@@ -1,0 +1,55 @@
+# insertion_sort_rec.py
+
+def insertion_sort_rec(a, i):
+
+    # base case
+    if i <= 0:
+        return a
+
+    insertion_sort_rec(a, i-1)
+    ins_val = a[i]
+    j = i - 1
+    print(f'j={j}, i={i}; ins_val={ins_val}')
+    while j >= 0 and a[j] > ins_val:
+        # Shift bigger value to left one slot
+        a[j+1] = a[j]
+        #print(f'a post shift: {a}')
+        j -= 1
+    # Insert value in the correct slot
+    a[j+1] = ins_val
+    #print(f'a post insert: {a}')
+
+    return a
+
+
+#------------------------------------------------------------------------------
+# TESTS
+#------------------------------------------------------------------------------
+
+a = [14, 2, 8, 3, 5, 45, 6, 12]
+result = insertion_sort_rec(a, len(a)-1)
+assert result == [2, 3, 5, 6, 8, 12, 14, 45]
+
+a = [14, 2, 8, 3, 8, 5, 45, 8, 6, 12]
+result = insertion_sort_rec(a, len(a)-1)
+assert result == [2, 3, 5, 6, 8, 8, 8, 12, 14, 45]
+
+a = [14, 2, 8, 3, 5, 6, 45, 12]
+result = insertion_sort_rec(a, len(a)-1)
+assert result == [2, 3, 5, 6, 8, 12, 14, 45]
+
+a = [14, 45, 6, 2, 8, 3, 5, 12]
+result = insertion_sort_rec(a, len(a)-1)
+assert result == [2, 3, 5, 6, 8, 12, 14, 45]
+
+a = [14, 2]
+result = insertion_sort_rec(a, len(a)-1)
+assert result == [2, 14]
+
+a = [2]
+result = insertion_sort_rec(a, len(a)-1)
+assert result == [2]
+
+a = []
+result = insertion_sort_rec(a, len(a)-1)
+assert result == []
